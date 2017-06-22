@@ -2,10 +2,12 @@
 Komutan Web Yönetim Sistemi Yenileme Çalışması
 
 ## Bağımlılıklar
-`
+```
 pip3 install django
 pip3 install GitPython
-`
+pip3 install django-wpadmin
+
+```
 ## Uygulamayı deploy etme
 ```
 git clone https://github.com/geekdinazor/komutan-next.git

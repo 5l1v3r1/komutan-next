@@ -30,10 +30,13 @@ ALLOWED_HOSTS = ['*']
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/giris'
 
+DAB_FIELD_RENDERER = 'ayarModul.renderers.BootstrapFieldRenderer'
+
+
 # Application definition
 
 INSTALLED_APPS = (
-    'wpadmin',
+    'ayarModul',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -1,11 +1,9 @@
 # komutan-next
 Komutan Web Yönetim Sistemi Yenileme Çalışması
 
-## Bağımlılıklar
+## Bağımlılıkların kurulması
 ```
-pip3 install django
-pip3 install GitPython
-pip3 install django-wpadmin
+pip3 install -r gerekler
 
 ```
 ## Uygulamayı deploy etme

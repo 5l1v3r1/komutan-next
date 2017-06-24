@@ -28,7 +28,8 @@ class Parametreler(models.Model):
 		verbose_name_plural = "Parametreler"
 
 class GitDepo(models.Model):
-	depoAdresi = models.URLField(verbose_name='Git Depo Adresi')
+	isim = models.CharField(max_length=50, default="Depo", verbose_name='Betiğin aldığı parametre')
+	adres = models.URLField(verbose_name='Git Depo Adresi')
 
 	class Meta:
 		db_table = "BetikDepo"
@@ -36,4 +37,4 @@ class GitDepo(models.Model):
 		verbose_name_plural = "Git Depo Ayarları"
 
 	def __str__(self):
-		return depoAdresi
+		return self.isim

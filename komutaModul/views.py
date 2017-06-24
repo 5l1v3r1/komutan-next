@@ -1,8 +1,8 @@
-import os
+import os, git, distutils.dir_util
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from .models import Betikler, Parametreler
+from .models import Betikler, Parametreler, GitDepo
 from cekirdek.models import Baglanti
 from fabric.api import *
 
@@ -47,10 +47,11 @@ def betikCalistir(request):
 				betikYol = os.getcwd() + '/komutaModul/betikler/' + betik
 				put(betikYol,'/tmp')
 				if 'sudo' in request.POST.keys():
-					cikti = sudo("bash " + betik + parametreler)
+					cikti = sudo("bash " + betik)
+					run("rm " + betik + parametreler)
 				else:
 					cikti = run('bash ' + betik + parametreler)
-				run("rm " + betik)
+					run("rm " + betik)
 
 
 			return HttpResponse(cikti,'text/plain; charset=utf-8')
@@ -76,3 +77,13 @@ def parametreKaydet(request):
 		return HttpResponse("Parametre Kaydedildi",'text/plain; charset=utf-8')
 	else:
 		return HttpResponse("Bu fonksiyon sadece POST methodu ile çalışır.",'text/plain; charset=utf-8')
+
+@login_required()
+def gitGuncelle(request):
+	depolar = GitDepo.objects.all()
+	for depo in depolar:
+		git.Repo.clone_from(depo.adres,'komutaModul/betikler/geciciDepo')
+		distutils.dir_util.remove_tree('komutaModul/betikler/geciciDepo/.git')
+		distutils.dir_util.copy_tree('komutaModul/betikler/geciciDepo','komutaModul/betikler/')
+		distutils.dir_util.remove_tree('komutaModul/betikler/geciciDepo/')
+	return HttpResponse("Betik Deposu güncellendi ! <br>Yeni betikleri görebilmek için sayfayı yenileyiniz. ",'text/plain; charset=utf-8')

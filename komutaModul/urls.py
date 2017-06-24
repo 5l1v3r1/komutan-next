@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^$', views.komutaModulGoster),
     url(r'^betikCalistir/$', views.betikCalistir),
     url(r'^parametreKaydet/$', views.parametreKaydet),
+    url(r'^gitGuncelle/$', views.gitGuncelle),
 ]    

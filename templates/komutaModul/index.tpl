@@ -2,49 +2,53 @@
 {% block title %}Komutan - Komuta Merkezi{% endblock %}
 {% block content %}
 <h2>Komuta Merkezi</h2> 
-<a href="betikEkle/"  class="label label-success">Yeni Betik Ekle</a>
-<a href="betikDuzenle/"  class="label label-primary">Betik Düzenle</a>
-<a href="betikSil/"  class="label label-danger">Betik Sil</a>
-<a href="gitGuncelle/"  class="label label-warning">Git Deposundan Betikleri Güncelle</a>
 <br>
-<br>
-<div class="row">
-<form id="betikForm" class="form-inline" role="form">
-	{% csrf_token %}
-	<div class="form-group">
-		<select class="form-control" name="betik" id="betik" >
-		<option value="">---</option>
-		{% for betik in betikler %}
-			<option>{{betik}}</option>
-		{% endfor %}
-		</select>
-	</div>
-{% if parametreler %}
-{% for parametre, degerler in parametreler.items %} 
-<div class="form-group kutu">
-<span>{{ degerler.0 }}: </span>
-<input type="text" class="parametre" name="{{ parametre }}" value="{{ degerler.1 }}">  
-</div>
-{% endfor %}
-{% endif %}
-	<div class="form-group kutu">	 
-        <span> Root Yetkisiyle Çalıştır&nbsp;&nbsp;</span>
-        <div class="material-switch pull-right">
-            <input id="rootCheckbox" name="sudo" type="checkbox"/> 
-            <label for="rootCheckbox" class="label-success"></label>
-        </div>
-	</div>
-<div class="form-group">
-	<button type="button" class="btn btn-success calistir">Çalıştır</button>
-</div>
+<div class="panel panel-success">
+    <div class="panel-heading">
+         <h3 class="panel-title pull-left">Betik Çalıştır</h3>
+        	<a class="btn-sm btn-success pull-right guncelle"><i class="fa fa-refresh" aria-hidden="true"></i></a>
+        	<a href="betikSil/" class="btn-sm btn-success pull-right"><i class="fa fa-trash" aria-hidden="true"></i></a>
+        	<a href="betikDuzenle/" class="btn-sm btn-success pull-right"><i class="fa fa-edit" aria-hidden="true"></i></a>
+        	<a href="betikEkle/" class="btn-sm btn-success pull-right"><i class="fa fa-plus" aria-hidden="true"></i></a>
 
-</form>
-
-</div>
-<div class="row">
-	<br>
-	<br>
-	<pre class="well cikti"></pre>
+        <div class="clearfix"></div>
+    </div>
+  <div class="panel-body">
+	<div>
+		<form id="betikForm" class="form-inline" role="form">
+				{% csrf_token %}
+				<div class="form-group">
+					<select class="form-control" name="betik" id="betik" >
+					<option value="">---</option>
+					{% for betik in betikler %}
+						<option>{{betik}}</option>
+					{% endfor %}
+					</select>
+				</div>
+			{% if parametreler %}
+			{% for parametre, degerler in parametreler.items %} 
+			<div class="form-group kutu">
+			<span>{{ degerler.0 }}: </span>
+			<input type="text" class="parametre form-control input-sm" name="{{ parametre }}" value="{{ degerler.1 }}">  
+			</div>
+			{% endfor %}
+			{% endif %}
+				<div class="form-group kutu">	 
+			        <span> Root Yetkisiyle Çalıştır&nbsp;&nbsp;</span>
+			        <div class="material-switch pull-right">
+			            <input id="rootCheckbox" name="sudo" type="checkbox"/> 
+			            <label for="rootCheckbox" class="label-success"></label>
+			        </div>
+				</div>
+			<div class="form-group">
+				<button type="button" class="btn btn-success calistir">Çalıştır</button>
+			</div>
+		</form>
+	</div>
+	<div class="row">
+		<pre class="well cikti"></pre>
+	</div>
+  </div>
 </div>
 </div>		
 {% endblock content %}
@@ -93,13 +97,28 @@
 	            }
 	        });
 	});
+
+	$('.guncelle').click(function(){ 
+		 $.get("gitGuncelle/", function(data, status){
+		 	$('.cikti').show();
+		 	$('.cikti').html(data);
+		 });
+	});
 </script>
 {% endblock customjs %}
 {% block customcss %}
 <style>
 	.cikti{
-		height: 60vh;
+		height: 50vh;
 		display: none;
+		margin-top: 15px
+	}
+	.kutu{
+		height: 43.33px !important;
+	}
+	.parametre{
+		border-radius: 15px;
+		margin-top: -5px
 	}
 </style>
 {% endblock customcss %}

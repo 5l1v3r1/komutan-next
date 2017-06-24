@@ -47,11 +47,10 @@ def betikCalistir(request):
 				betikYol = os.getcwd() + '/komutaModul/betikler/' + betik
 				put(betikYol,'/tmp')
 				if 'sudo' in request.POST.keys():
-					cikti = sudo("bash " + betik)
-					run("rm " + betik + parametreler)
+					cikti = sudo("bash " + betik + parametreler)
 				else:
 					cikti = run('bash ' + betik + parametreler)
-					run("rm " + betik)
+				run("rm " + betik)
 
 
 			return HttpResponse(cikti,'text/plain; charset=utf-8')

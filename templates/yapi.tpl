@@ -19,7 +19,8 @@
 
     <!-- Custom CSS -->
     <link href="/static/css/sb-admin-2.css" rel="stylesheet">
-    <link href="/style.css" rel="stylesheet">
+   
+    <link rel="stylesheet" href="/static/css/awesomplete.css" />
     {% block customcss %}{% endblock %}
 
     <!-- Custom Fonts -->
@@ -137,6 +138,8 @@
 
     <!-- Custom JavaScript -->
     <script src="/static/js/sb-admin-2.js"></script>
+    <script src="/static/js/shortcut.js"></script>
+    <script src="/static/js/awesomplete.js"></script>
 
     {% block customjs %}{% endblock %}
 

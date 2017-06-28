@@ -109,7 +109,7 @@
 <script>
 	
 	var ajax = new XMLHttpRequest();
-	ajax.open("GET", "/paketlist", true);
+	ajax.open("GET", "/mpsModul/paketListeAl", true);
 	ajax.onload = function() {
 		var list = JSON.parse(ajax.responseText).map(function(i) { return i.isim; });
 		if (list=="hata"){
@@ -122,10 +122,6 @@
 	
 	
 	$(document).ready(function() {
-		
-		
-		var bg = Cookies.get('mlsBg');
-		$('body').css({"background" : 'url('+bg+')  no-repeat center center fixed', "-webkit-background-size":"cover", "-moz-background-size":"cover","-o-background-size":"cover","background-size":"cover","margin":"20px 20px 20px 20px"});
 		
 		$('#calismakod').hide();
 		$("#yukleniyor").hide();

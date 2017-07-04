@@ -27,9 +27,9 @@ def mpsModulGoster(request):
 		d['surum'] = pn.split("|")[1]
 		d['url'] = pn.split("|")[2]
 		d['aciklama'] = pn.split("|")[3]
-		if pn.split("|")[4] == "True":
+		if pn.split("|")[4] == "True\n":
 			d['kurulu'] = True
-		elif pn.split("|")[4] == "False":
+		elif pn.split("|")[4] == "False\n":
 			d['kurulu'] = False
 		lst.append(d)
 

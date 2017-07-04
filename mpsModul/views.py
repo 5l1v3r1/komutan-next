@@ -33,6 +33,13 @@ def mpsModulGoster(request):
 		lst.append(d)
 
 	return render(request, 'mpsModul/index.tpl', {"lst":lst})
+
+@login_required()
+def paketKurGoster(request, paket):
+	if paket:
+		return render(request, 'mpsModul/kurlog.tpl', {"paket":paket})
+	else: 
+		return HttpResponse("Paket değişkeni eksik. Örnek kullanım: /mpsModul/kur/firefox",'text/plain; charset=utf-8')
 	
 @login_required()
 def paketKur(request, paket):
@@ -48,10 +55,17 @@ def paketKur(request, paket):
 			cikti = cikti.replace('[1;33m','<span style="color:orange; font-weight:bold;">')
 			cikti = cikti.replace('[1;34m','<span style="color:blue; font-weight:bold;">')
 			cikti = cikti.replace('[1;35m','<span style="color:purple; font-weight:bold;">')
-			return render(request, 'mpsModul/kurlog.tpl', {"cikti":cikti})
+			return HttpResponse(cikti,'text/plain; charset=utf-8')
 	else: 
-		return HttpResponse("Paket değişkeni eksik. Örnek kullanım: /mpsModul/kur/firefox",'text/plain; charset=utf-8')
+		return HttpResponse("Paket değişkeni eksik. Örnek kullanım: /mpsModul/kur/firefox/islem/",'text/plain; charset=utf-8')
 		
+@login_required()
+def paketSilGoster(request, paket):
+	if paket:
+		return render(request, 'mpsModul/sillog.tpl', {"paket":paket})
+	else: 
+		return HttpResponse("Paket değişkeni eksik. Örnek kullanım: /mpsModul/sil/firefox",'text/plain; charset=utf-8')
+				
 @login_required()
 def paketSil(request, paket):
 	env.host_string = Baglanti.objects.all()[0].sunucu
@@ -66,6 +80,6 @@ def paketSil(request, paket):
 			cikti = cikti.replace('[1;33m','<span style="color:orange; font-weight:bold;">')
 			cikti = cikti.replace('[1;34m','<span style="color:blue; font-weight:bold;">')
 			cikti = cikti.replace('[1;35m','<span style="color:purple; font-weight:bold;">')
-			return render(request, 'mpsModul/sillog.tpl', {"cikti":cikti})
+			return HttpResponse(cikti,'text/plain; charset=utf-8')
 	else: 
-		return HttpResponse("Paket değişkeni eksik. Örnek kullanım: /mpsModul/sil/firefox",'text/plain; charset=utf-8')
+		return HttpResponse("Paket değişkeni eksik. Örnek kullanım: /mpsModul/sil/firefox/islem",'text/plain; charset=utf-8')

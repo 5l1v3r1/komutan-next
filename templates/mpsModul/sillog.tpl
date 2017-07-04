@@ -8,7 +8,7 @@
     <h3 class="panel-title"><a href="/mpsModul">Milis Yazılım Merkezi</a> > Paket kaldır</h3>
   </div>
   <div class="panel-body">
-	<pre class="well cikti">{{ cikti | safe }}</pre>
+	<pre class="well cikti"><img src="/static/img/yukleniyor.gif" class="img-responsive center-block"><p class="text-center">{{ paket }} paketi sisteminizden kaldırılıyor, <br> işlem bitene kadar bu sayfayı kapatmayınız.</p></pre>
   </div>
 </div>
 {% endblock content %}
@@ -22,3 +22,13 @@
 		}
 	</style>
 {% endblock customcss %}
+
+{% block customjs %}
+	<script>
+	$(document).ready(function() {
+				 $.get("islem/", function(data, status){
+					$('.cikti').html(data);
+				 });
+	});
+	</script>
+{% endblock customjs %}

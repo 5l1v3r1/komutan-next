@@ -22,7 +22,6 @@ def mpsModulGoster(request):
 	lst = []
 	for pn in satirlar:
 		d = {}
-		print(pn.split("|"))
 		d['isim'] = pn.split("|")[0]
 		d['surum'] = pn.split("|")[1]
 		d['url'] = pn.split("|")[2]

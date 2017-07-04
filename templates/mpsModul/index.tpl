@@ -30,9 +30,9 @@
 								<td>{{ paket.surum }}</td>
 								<td>{{ paket.aciklama }}</td>
 								{% if  paket.kurulu %}
-								<td><a href="/sil/{{ paket.isim }}" class="btn btn-success">Kurulu</a></td>
+								<td><a href="sil/{{ paket.isim }}" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Paketi silmek için tıklayınız.">Kurulu</a></td>
 								{% else %}
-								<td><a href="/kur/{{ paket.isim }}" class="btn btn-danger">Kurulu değil</a></td>
+								<td><a href="kur/{{ paket.isim }}" class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Paketi kurmak için tıklayınız.">Kurulu değil</a></td>
 								{% endif %}
 							</tr>
 							{% endfor %}
@@ -78,6 +78,7 @@ $(document).ready(function() {
     $('#myInput').on( 'keyup', function () {
     table.search( this.value ).draw();
 } );
+$('[data-toggle="tooltip"]').tooltip(); 
 } );
 
 </script>

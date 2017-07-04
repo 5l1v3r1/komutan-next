@@ -34,3 +34,38 @@ def mpsModulGoster(request):
 
 	return render(request, 'mpsModul/index.tpl', {"lst":lst})
 	
+@login_required()
+def paketKur(request, paket):
+	env.host_string = Baglanti.objects.all()[0].sunucu
+	env.user = Baglanti.objects.all()[0].kullanici
+	env.password = Baglanti.objects.all()[0].sifre
+	if paket:
+		with hide('output','running'), cd('/tmp'):
+			cikti = sudo('mps kur ' + paket)
+			cikti = cikti.replace('[0;39m','</span>')
+			cikti = cikti.replace('[1;31m','<span style="color:red; font-weight:bold;">')
+			cikti = cikti.replace('[1;32m','<span style="color:green; font-weight:bold;">')
+			cikti = cikti.replace('[1;33m','<span style="color:orange; font-weight:bold;">')
+			cikti = cikti.replace('[1;34m','<span style="color:blue; font-weight:bold;">')
+			cikti = cikti.replace('[1;35m','<span style="color:purple; font-weight:bold;">')
+			return render(request, 'mpsModul/kurlog.tpl', {"cikti":cikti})
+	else: 
+		return HttpResponse("Paket değişkeni eksik. Örnek kullanım: /mpsModul/kur/firefox",'text/plain; charset=utf-8')
+		
+@login_required()
+def paketSil(request, paket):
+	env.host_string = Baglanti.objects.all()[0].sunucu
+	env.user = Baglanti.objects.all()[0].kullanici
+	env.password = Baglanti.objects.all()[0].sifre
+	if paket:
+		with hide('output','running'), cd('/tmp'):
+			cikti = sudo('mps -sz ' + paket)
+			cikti = cikti.replace('[0;39m','</span>')
+			cikti = cikti.replace('[1;31m','<span style="color:red; font-weight:bold;">')
+			cikti = cikti.replace('[1;32m','<span style="color:green; font-weight:bold;">')
+			cikti = cikti.replace('[1;33m','<span style="color:orange; font-weight:bold;">')
+			cikti = cikti.replace('[1;34m','<span style="color:blue; font-weight:bold;">')
+			cikti = cikti.replace('[1;35m','<span style="color:purple; font-weight:bold;">')
+			return render(request, 'mpsModul/sillog.tpl', {"cikti":cikti})
+	else: 
+		return HttpResponse("Paket değişkeni eksik. Örnek kullanım: /mpsModul/sil/firefox",'text/plain; charset=utf-8')

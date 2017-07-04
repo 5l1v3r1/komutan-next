@@ -6,5 +6,6 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.mpsModulGoster),
-    #url(r'^paketListeAl/$', views.paketListeAl),
+    url(r'^kur/(?P<paket>[-\w]+)/$', views.paketKur),
+    url(r'^sil/(?P<paket>[-\w]+)/$', views.paketSil),
 ]    

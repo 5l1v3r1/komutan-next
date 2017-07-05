@@ -46,6 +46,7 @@
 		</form>
 	</div>
 	<div class="row">
+		<div id="calismaMesaj"><img src="/static/img/yukleniyor.gif" class="img-responsive center-block"><p class="text-center">Seçtiğiniz betik sisteminizde çalıştırılıyor. <br> Çıktı betiğin çalışması bittiğinde gözükecektir, lütfen sayfayı kapatmayınız.</p></div>
 		<pre class="well cikti"></pre>
 	</div>
   </div>
@@ -91,7 +92,12 @@
 	            url: '/komutaModul/betikCalistir/',
 	            type: 'POST',
 	            data: formVerisi,
+	            beforeSend: function(){
+					$('.cikti').hide();
+					$('#calismaMesaj').show();
+				},
 	            success: function (data) {
+					$('#calismaMesaj').hide();
 	            	$('.cikti').show();
 	                $('.cikti').html(data);
 	            }
@@ -119,6 +125,9 @@
 	.parametre{
 		border-radius: 15px;
 		margin-top: -5px
+	}
+	#calismaMesaj{
+		display: none;
 	}
 </style>
 {% endblock customcss %}

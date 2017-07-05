@@ -8,7 +8,7 @@
     <h3 class="panel-title"><a href="/mpsModul">Milis Yazılım Merkezi</a> > Paket kur</h3>
   </div>
   <div class="panel-body">
-	<pre class="well cikti"><img src="/static/img/yukleniyor.gif" class="img-responsive center-block"><p class="text-center">{{ paket }} paketi indirilip sisteminize kuruluyor, <br> bu işlem paket boyutuna ve bağlantı hızınıza göre birkaç dakika sürebilir lütfen sayfayı kapatmadan bekleyiniz...</p></pre>
+	<img src="/static/img/yukleniyor.gif" class="img-responsive center-block"><p class="text-center">{{ paket }} paketi indirilip sisteminize kuruluyor, <br> bu işlem paket boyutuna ve bağlantı hızınıza göre birkaç dakika sürebilir lütfen sayfayı kapatmadan bekleyiniz...</p>
   </div>
 </div>
 {% endblock content %}
@@ -27,7 +27,7 @@
 	<script>
 	$(document).ready(function() {
 				 $.get("islem/", function(data, status){
-					$('.cikti').html(data);
+					$('.panel-body').html('<pre class="well cikti">' + data + '</pre>');
 				 });
 	});
 	</script>

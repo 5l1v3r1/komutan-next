@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^gitGuncelle/$', views.gitGuncelle),
     url(r'^betikEkle/$', views.betikEkle),
     url(r'^betikDuzenle/$', views.betikDuzenle),
+    url(r'^betikSil/$', views.betikSil),
 ]    

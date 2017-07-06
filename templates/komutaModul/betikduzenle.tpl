@@ -1,5 +1,5 @@
 {% extends 'yapi.tpl' %}
-{% block title %}Komutan - Milis Yazılım Merkezi{% endblock title %}
+{% block title %}Komutan - Komuta Merkezi{% endblock title %}
 {% block content %}
 <h2>Komuta Merkezi</h2>
 <br>

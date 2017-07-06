@@ -105,7 +105,7 @@ def betikDuzenle(request):
 		kod = request.POST['betikKodu']
 		f = open(os.curdir + '/komutaModul/betikler/' + betik,'w')
 		f.writelines(kod)
-		return render(request, 'komutaModul/betikekle.tpl', {"basarili":True})	
+		return render(request, 'komutaModul/betikduzenle.tpl', {"basarili":True})	
 	if 'betik' in request.GET.keys():
 		betik = request.GET['betik']
 		print(request.GET.keys())
@@ -113,3 +113,14 @@ def betikDuzenle(request):
 		kod = f.read()
 		return render(request, 'komutaModul/betikduzenle.tpl', {"betikler":betikler,"betik":betik,"kod":kod})
 	return render(request, 'komutaModul/betikduzenle.tpl', {"betikler":betikler})
+
+
+@login_required()
+def betikSil(request):
+	betikler = os.listdir(os.curdir + '/komutaModul/betikler/')
+	if(request.method=='POST'):
+		betik = request.POST['betikAdi']
+		if betik in betikler: #Güvenlik tedbiri
+			os.remove(os.curdir + '/komutaModul/betikler/' + betik)
+			return render(request, 'komutaModul/betiksil.tpl', {"basarili":True})	
+	return render(request, 'komutaModul/betiksil.tpl', {"betikler":betikler})

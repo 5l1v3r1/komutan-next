@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^betikCalistir/$', views.betikCalistir),
     url(r'^parametreKaydet/$', views.parametreKaydet),
     url(r'^gitGuncelle/$', views.gitGuncelle),
+    url(r'^betikEkle/$', views.betikEkle),
 ]    

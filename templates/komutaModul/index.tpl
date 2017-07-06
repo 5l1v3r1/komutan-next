@@ -19,7 +19,7 @@
 				{% csrf_token %}
 				<div class="form-group">
 					<select class="form-control" name="betik" id="betik" >
-					<option value="">---</option>
+					<option>---</option>
 					{% for betik in betikler %}
 						<option>{{betik}}</option>
 					{% endfor %}
@@ -56,13 +56,19 @@
 
 {% block customjs %}
 <script>
+	$(".calistir").attr("disabled", true);
+	
 	{% if betik %}
 		$('#betik').val("{{ betik }}")
+		$(".calistir").attr("disabled", false);
 	{% endif %}
 	
 	$('#betik').change(function(event) {
-		if (this.value) {
+		if (this.value != "---") {
 			window.location.replace("?betik="+this.value);
+			$(".calistir").attr("disabled", false);
+		}else{
+			$(".calistir").attr("disabled", true);
 		}
 	});
 

@@ -86,3 +86,14 @@ def gitGuncelle(request):
 		distutils.dir_util.copy_tree('komutaModul/betikler/geciciDepo','komutaModul/betikler/')
 		distutils.dir_util.remove_tree('komutaModul/betikler/geciciDepo/')
 	return HttpResponse("Betik Deposu güncellendi ! <br>Yeni betikleri görebilmek için sayfayı yenileyiniz. ",'text/plain; charset=utf-8')
+	
+@login_required()
+def betikEkle(request):
+	if(request.method=='POST'):
+		betik = request.POST['betikAdi']
+		kod = request.POST['betikKodu']
+		f = open(os.curdir + '/komutaModul/betikler/' + betik,'w')
+		f.writelines(kod)
+
+		return render(request, 'komutaModul/betikekle.tpl', {"basarili":True})
+	return render(request, 'komutaModul/betikekle.tpl')

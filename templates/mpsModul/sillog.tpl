@@ -5,7 +5,7 @@
 <br>
 <div class="panel panel-info">
   <div class="panel-heading">
-    <h3 class="panel-title"><a href="/mpsModul">Milis Yazılım Merkezi</a> > Paket kaldır</h3>
+    <h3 class="panel-title"><a href="/mpsModul"><u>Paket işlemleri</u></a> > Paket kaldır</h3>
   </div>
   <div class="panel-body">
 	<img src="/static/img/yukleniyor.gif" class="img-responsive center-block"><p class="text-center">{{ paket }} paketi sisteminizden kaldırılıyor, <br> işlem bitene kadar bu sayfayı kapatmayınız.</p>

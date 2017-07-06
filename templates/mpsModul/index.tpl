@@ -5,7 +5,11 @@
 <br>
 <div class="panel panel-info">
   <div class="panel-heading">
-    <h3 class="panel-title">Paket işlemleri</h3>
+         <h3 class="panel-title pull-left">Paket işlemleri</h3>
+        	<a class="btn-sm btn-info pull-right guncelle"><i class="fa fa-refresh" aria-hidden="true"></i></a>
+        	<a class="btn-sm btn-info pull-right sunucuEkle"><i class="fa fa-server" aria-hidden="true"></i></a>
+
+        <div class="clearfix"></div>    
   </div>
   <div class="panel-body">
 		<div class="tablo">		

@@ -47,8 +47,6 @@
 </div>
 {% endblock content %}
 
-.tablo { padding: 1em; }
-
 {% block customjs %}
 <script src="/static/js/jquery.dataTables.js"></script>
 <script src="/static/js/dataTables.bootstrap.js"></script>

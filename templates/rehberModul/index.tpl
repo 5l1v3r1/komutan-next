@@ -80,6 +80,11 @@ $(document).ready(function() {
 $('[data-toggle="tooltip"]').tooltip(); 
 } );
 
+$('.guncelle').click(function(){ 
+     $.get("gitGuncelle/", function(data, status){
+        alert(data)
+     });
+});
 </script>
 {% endblock customjs %}
 {% block customcss %}

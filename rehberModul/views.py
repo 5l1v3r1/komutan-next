@@ -1,7 +1,9 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from markdown2 import markdown_path as parseMarkdown
-import os
+from .models import GitDepo
+import os, git, distutils.dir_util
 
 @login_required()
 def rehberGoster(request):
@@ -18,5 +20,16 @@ def rehberGoster(request):
 
 @login_required()
 def dokumanGoster(request, dokuman):
-	html = parseMarkdown(os.curdir + '/rehberModul/dokumanlar/' + dokuman + ".md", extras=["metadata", "fenced-code-blocks","tables","break-on-newline"],)
+	if dokuman in os.listdir(os.curdir + '/rehberModul/dokumanlar/'):
+		html = parseMarkdown(os.curdir + '/rehberModul/dokumanlar/' + dokuman, extras=["metadata", "fenced-code-blocks","tables","break-on-newline"],)
 	return render(request, 'rehberModul/goster.tpl', {"html":html})
+
+@login_required()
+def gitGuncelle(request):
+	depolar = GitDepo.objects.all()
+	for depo in depolar:
+		git.Repo.clone_from(depo.adres,'rehberModul/dokumanlar/geciciDepo')
+		distutils.dir_util.remove_tree('rehberModul/dokumanlar/geciciDepo/.git')
+		distutils.dir_util.copy_tree('rehberModul/dokumanlar/geciciDepo','rehberModul/dokumanlar/')
+		distutils.dir_util.remove_tree('rehberModul/dokumanlar/geciciDepo/')
+	return HttpResponse("Rehber Deposu güncellendi ! \nYeni dokumanları görebilmek için sayfayı yenileyiniz. ",'text/plain; charset=utf-8')

@@ -44,7 +44,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cekirdek',
-    'komutaModul'
+    'komutaModul',
+    'rehberModul',
 )
 
 MIDDLEWARE_CLASSES = (

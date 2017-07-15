@@ -6,5 +6,6 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.rehberGoster),
-    url(r'^(?P<dokuman>[-_\w]+).md$', views.dokumanGoster),
+    url(r'^gitGuncelle/$', views.gitGuncelle),
+    url(r'^(?P<dokuman>[-_.\w]+)$', views.dokumanGoster),
 ]    

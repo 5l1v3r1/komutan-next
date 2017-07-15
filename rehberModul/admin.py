@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import GitDepo
 
-# Register your models here.
+# Git depo ayarları arayüz kaydı
+admin.site.register(GitDepo)

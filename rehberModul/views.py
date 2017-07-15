@@ -33,3 +33,13 @@ def gitGuncelle(request):
 		distutils.dir_util.copy_tree('rehberModul/dokumanlar/geciciDepo','rehberModul/dokumanlar/')
 		distutils.dir_util.remove_tree('rehberModul/dokumanlar/geciciDepo/')
 	return HttpResponse("Rehber Deposu güncellendi ! \nYeni dokumanları görebilmek için sayfayı yenileyiniz. ",'text/plain; charset=utf-8')
+
+@login_required()
+def dokumanEkle(request):
+	if(request.method=='POST'):
+		dokuman = request.POST['dokumanAdi']
+		kod = request.POST['markdownKodu']
+		f = open(os.curdir + '/rehberModul/dokumanlar/' + dokuman,'w')
+		f.writelines(kod)
+		return render(request, 'rehberModul/dokumanekle.tpl', {"basarili":True})
+	return render(request, 'rehberModul/dokumanekle.tpl')

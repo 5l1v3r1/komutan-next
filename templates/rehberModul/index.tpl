@@ -7,9 +7,9 @@
   <div class="panel-heading">
          <h3 class="panel-title pull-left">Doküman Listesi</h3>
             <a class="btn-sm btn-warning pull-right guncelle"><i class="fa fa-refresh" aria-hidden="true"></i></a>
-            <a class="btn-sm btn-warning pull-right" href="dokumanSil"><i class="fa fa-trash" aria-hidden="true"></i></a>
-            <a class="btn-sm btn-warning pull-right" href="dokumanDuzenle"><i class="fa fa-edit" aria-hidden="true"></i></a>
-            <a class="btn-sm btn-warning pull-right" href="dokumanEkle"><i class="fa fa-plus" aria-hidden="true"></i></a>
+            <a class="btn-sm btn-warning pull-right" href="dokumanSil/"><i class="fa fa-trash" aria-hidden="true"></i></a>
+            <a class="btn-sm btn-warning pull-right" href="dokumanDuzenle/"><i class="fa fa-edit" aria-hidden="true"></i></a>
+            <a class="btn-sm btn-warning pull-right" href="dokumanEkle/"><i class="fa fa-plus" aria-hidden="true"></i></a>
         <div class="clearfix"></div>    
   </div>
   <div class="panel-body">

@@ -16,7 +16,7 @@
   <div class="panel-body">
 	<div>
 		<form id="betikForm" class="form-inline" role="form">
-				{% csrf_token %}
+		{% csrf_token %}
 				<div class="form-group">
 					<select class="form-control" name="betik" id="betik" >
 					<option>---</option>
@@ -46,7 +46,6 @@
 		</form>
 	</div>
 	<div class="row">
-		<div id="calismaMesaj"><img src="/static/img/yukleniyor.gif" class="img-responsive center-block"><p class="text-center">Seçtiğiniz betik sisteminizde çalıştırılıyor. <br> Çıktı betiğin çalışması bittiğinde gözükecektir, lütfen sayfayı kapatmayınız.</p></div>
 		<pre class="well cikti"></pre>
 	</div>
   </div>
@@ -90,24 +89,31 @@
         });		
 	});
 
+
 	$(".calistir").click(function () {
 		
-		formVerisi = $('#betikForm').serialize();		
+		formVerisi = $('#betikForm').serialize();	
+	        
+	        xmlhttp = new XMLHttpRequest();
 
-	    $.ajax({
-	            url: '/komutaModul/betikCalistir/',
-	            type: 'POST',
-	            data: formVerisi,
-	            beforeSend: function(){
-					$('.cikti').hide();
-					$('#calismaMesaj').show();
-				},
-	            success: function (data) {
-					$('#calismaMesaj').hide();
-	            	$('.cikti').show();
-	                $('.cikti').html(data);
-	            }
-	        });
+	        function reqListener () {
+	            //$('.cikti').html('Komut çalışmaya başladı.');
+	        }
+
+	        function updateProgress (oEvent) {
+	      
+	            $('.cikti').html(oEvent.target.responseText);
+	        }
+        
+			url = '/komutaModul/betikCalistir/';
+			xmlhttp.addEventListener('load', reqListener);
+			xmlhttp.addEventListener('progress', updateProgress, false);
+			xmlhttp.open("post", url, true);
+			xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xmlhttp.send(formVerisi);
+			$('.cikti').show();
+
+
 	});
 
 	$('.guncelle').click(function(){ 
@@ -131,9 +137,6 @@
 	.parametre{
 		border-radius: 15px;
 		margin-top: -5px
-	}
-	#calismaMesaj{
-		display: none;
 	}
 </style>
 {% endblock customcss %}

@@ -1,6 +1,6 @@
 #-h:Host:google.com
 
-sayac=5
+sayac=15
 
 function kullanim
 {

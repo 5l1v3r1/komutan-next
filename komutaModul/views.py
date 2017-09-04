@@ -1,11 +1,10 @@
 import os, git, distutils.dir_util
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, StreamingHttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import Betikler, Parametreler, GitDepo
 from cekirdek.models import Baglanti
-from fabric.api import *
-
+from cekirdek.utils import SSHelper as SSH
 
 
 @login_required()
@@ -31,32 +30,33 @@ def komutaModulGoster(request):
 	else:
 		return render(request, 'komutaModul/index.tpl', {"betikler":betikler})
 
-@login_required()
+@login_required()   
 def betikCalistir(request):
 	if(request.method=='POST'):
+		print(request.POST)
 		betik = request.POST['betik']
 		parametreler = ""
 		for key in request.POST.keys():
 			if  "-" in key :
 				parametreler += " " + key + " " + request.POST[key]
-		if betik:
-			env.host_string = Baglanti.objects.all()[0].sunucu
-			env.user = Baglanti.objects.all()[0].kullanici
-			env.password = Baglanti.objects.all()[0].sifre
-			with hide('output','running'), cd('/tmp'):
-				betikYol = os.getcwd() + '/komutaModul/betikler/' + betik
-				put(betikYol,'/tmp')
-				if 'sudo' in request.POST.keys():
-				    cikti = sudo("bash " + betik + parametreler)
-				else:
-				    cikti = run('bash ' + betik + parametreler)
-				run("rm " + betik)
-
-
-			return HttpResponse(cikti,'text/plain; charset=utf-8')
+		if betik:	
+			sunucu = Baglanti.objects.all()[0].sunucu
+			kullanici = Baglanti.objects.all()[0].kullanici
+			sifre = Baglanti.objects.all()[0].sifre
+			
+			ssh = SSH(hostname=sunucu, username=kullanici, password=sifre)
+			betikYol = os.getcwd() + '/komutaModul/betikler/' + betik
+			print(betikYol)
+			ssh.put(betikYol,'/tmp/'+betik)
+			if 'sudo' in request.POST.keys():
+				stream = ssh.sudo("bash " + "/tmp/" + betik + parametreler)
+			else:
+				stream = ssh.run("bash " + "/tmp/" + betik + parametreler)
+			response = StreamingHttpResponse(stream, status=200, content_type='text/event-stream')
+			response['Cache-Control'] = 'no-cache'
+			return response
 	else:
 		return HttpResponse("Bu fonksiyon sadece POST methodu ile çalışır.",'text/plain; charset=utf-8')
-
 @login_required()
 def parametreKaydet(request):
 	if(request.method=='POST'):

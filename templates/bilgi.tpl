@@ -32,7 +32,7 @@
 </div>	
 </body>
 {% endblock content %}  
-
+{% endif %}
 {% block customjs %}
 <script>
 	formVerisi = $('#bilgiForm').serialize();	
@@ -57,7 +57,8 @@
 	$('.cikti').show();
 </script>
 {% endblock customjs %}
-% block customcss %}
+
+{% block customcss %}
 <style>
 	.cikti{
 		height: 50vh;
@@ -66,5 +67,3 @@
 	}
 </style>
 {% endblock customcss %}
-
-{% endif %}

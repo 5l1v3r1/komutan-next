@@ -1,5 +1,6 @@
 django
 GitPython
 fabric3
+paramiko
 django-bootstrap3
 markdown2

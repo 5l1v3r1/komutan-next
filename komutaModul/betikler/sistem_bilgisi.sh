@@ -7,7 +7,7 @@ DATE=`date`
 KERNEL=`uname -a`
 CPWD=`pwd`
 ME=`whoami`
-CPU=`arch`
+CPU=`uname -m`
 
 printf "=== SİSTEM ===\n"
 printf "  Dağıtım:\t"$SYSINFO"\n"

@@ -15,6 +15,7 @@
   </div>
   <div class="panel-body">
     Sistem bilgileri burada.
+    {{ bilgi }}
   </div>
 </div>
 </div>

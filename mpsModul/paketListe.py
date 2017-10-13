@@ -1,6 +1,7 @@
 import os
 paketvt = "/depo/paketler/paket.vt"
 talimatdizin = "/root/talimatname/"
+ektalimatdizin = "/root/talimatlar/"
 
 def talimatOku(paket):
 	if os.path.isfile(talimatdizin + "genel/" + paket + "/talimat"):

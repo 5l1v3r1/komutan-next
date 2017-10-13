@@ -93,25 +93,25 @@
 	$(".calistir").click(function () {
 		
 		formVerisi = $('#betikForm').serialize();	
-	        
-	        xmlhttp = new XMLHttpRequest();
+		
+		xmlhttp = new XMLHttpRequest();
 
-	        function reqListener () {
-	            //$('.cikti').html('Komut çalışmaya başladı.');
-	        }
+		function reqListener () {
+			//$('.cikti').html('Komut çalışmaya başladı.');
+		}
 
-	        function updateProgress (oEvent) {
-	      
-	            $('.cikti').html(oEvent.target.responseText);
-	        }
-        
-			url = '/komutaModul/betikCalistir/';
-			xmlhttp.addEventListener('load', reqListener);
-			xmlhttp.addEventListener('progress', updateProgress, false);
-			xmlhttp.open("post", url, true);
-			xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			xmlhttp.send(formVerisi);
-			$('.cikti').show();
+		function updateProgress (oEvent) {
+	  
+			$('.cikti').html(oEvent.target.responseText);
+		}
+	
+		url = '/komutaModul/betikCalistir/';
+		xmlhttp.addEventListener('load', reqListener);
+		xmlhttp.addEventListener('progress', updateProgress, false);
+		xmlhttp.open("post", url, true);
+		xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xmlhttp.send(formVerisi);
+		$('.cikti').show();
 
 
 	});

@@ -9,6 +9,7 @@
 <br>
 <br>
 <form id="bilgiForm" class="form-inline" role="form">
+{% csrf_token %}
 <div class="col-md-6">
 <div class="panel panel-info">
   <div class="panel-heading">
@@ -16,7 +17,8 @@
   </div>
   <div class="panel-body">
     Sistem bilgileri burada.
-    
+    <input type="text" hidden name="betik" value="sistem_bilgisi.sh">
+    <pre class="well cikti"></pre>
   </div>
 </div>
 </div>

@@ -1,42 +1,12 @@
-SYSINFO=`head -n 1 /etc/issue`
-IFS=$'\n'
+while :
+do	
+CPU_USAGE=` cat <(grep 'cpu ' /proc/stat) <(sleep 4 && grep 'cpu ' /proc/stat) | awk -v RS="" '{printf "%.0f\n", ($13-$2+$15-$4)*100/($13-$2+$15-$4+$16-$5)}'`
+MEM_TOT=`cat /proc/meminfo | grep MemTotal: | awk '{print $2}'`
+MEM_USED=`cat /proc/meminfo | grep Active: | awk '{print $2}'`
+MEM_USAGE=$[$MEM_USED * 100 / $MEM_TOT]
 UPTIME=`uptime`
-D_UP=${UPTIME:1}
-MYGROUPS=`groups`
-DATE=`date`
-KERNEL=`uname -a`
-CPWD=`pwd`
-ME=`whoami`
-CPU=`uname -m`
-
-printf "=== SİSTEM ===\n"
-printf "  Dağıtım:\t"$SYSINFO"\n"
-printf "  Çekirdek:\t"$KERNEL"\n"
-printf "  Uptime:\t"$D_UP"\n"
-free -ht | awk '
-/Mem/{print "  Bellek:\tToplam: " $2 "\tKullanılan: " $3 "\tBoş: " $4 }
-/Swap/{print "  Swap:\t\tToplam: " $2 "\tKullanılan: " $3 "\tBoş: " $4 }'
-printf "  Mimari:\t"$CPU"\n"
-cat /proc/cpuinfo | grep "model name\|processor" | awk '
-/processor/{printf "  İşlemci:\t" $3 " : " }
-/model\ name/{
-i=4
-while(i<=NF){
-	printf $i
-	if(i<NF){
-		printf " "
-	}
-	i++
-}
-printf "\n"
-}'
-printf "  Tarih:\t\t"$DATE"\n"
-printf "\n=== KULLANICI ===\n"
-printf "  Kullanıcı:\t\t"$ME" (uid:"$UID")\n"
-printf "  Gruplar:\t"$MYGROUPS"\n"
-printf "  Ev dizini:\t"$HOME"\n"
-printf "\n=== AĞ ===\n"
-printf "  Hostname:\t"$HOSTNAME"\n"
-ip -o addr | awk '/inet /{print "  IP Adresi (" $2 "):\t" $4}'
-/sbin/route -n | awk '/^0.0.0.0/{ printf "  Gateway:\t"$2"\n" }'
-cat /etc/resolv.conf | awk '/^nameserver/{ printf "  Name Server:\t" $2 "\n"}'
+SISTEM=`uname -a`
+echo "~-~-~"
+echo "{\"CPU\":$CPU_USAGE,\"MEM\":$MEM_USAGE,\"UPTIME\":\"$UPTIME\",\"SISTEM\":\"$SISTEM\"}"
+sleep 1
+done
